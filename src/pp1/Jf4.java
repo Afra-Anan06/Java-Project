@@ -1,6 +1,7 @@
 package pp1;
 
 import java.awt.EventQueue;
+import loginDatabase.LoginDB;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -10,6 +11,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import java.awt.Button;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
 
@@ -75,6 +77,19 @@ public class Jf4 extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				Jf6 j= new Jf6();
 			      j.setVisible(true);
+			      String name = textField.getText();
+			      String uname = textField_1.getText();
+			      String pass = passwordField.getText();
+			      try {
+					LoginDB.registerLogin(uname, pass, name, "U");
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+					System.out.println("Duplicate");
+				}
+//			      System.out.println(name);
+//			      System.out.println(pass);
+			      
 				
 			}
 		});
@@ -87,6 +102,16 @@ public class Jf4 extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				Jf5 j= new Jf5();
 			    j.setVisible(true);
+			    String name = textField.getText();
+			      String uname = textField_1.getText();
+			      String pass = passwordField.getText();
+			      try {
+					LoginDB.registerLogin(uname, pass, name, "E");
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+					System.out.println("Duplicate");
+				}
 			}
 		});
 		button_1.setBounds(208, 169, 70, 22);

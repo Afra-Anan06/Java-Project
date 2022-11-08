@@ -5,20 +5,24 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import loginDatabase.LoginDB;
+
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextPane;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
 
 public class jf3 extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
-	private JPasswordField passwordField;
+	private JTextField ID;
+	private JPasswordField password;
 
 	/**
 	 * Launch the application.
@@ -65,7 +69,22 @@ public class jf3 extends JFrame {
 		JButton login = new JButton("Login");
 		login.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				String userId = ID.getText();
+				String pass = password.getText();
+				try {
+					String ret = LoginDB.login(userId, pass);
+					if(ret!=null)
+					{
+						System.out.println("Login Successful");
+					}
+					else
+					{
+						System.out.println("Username or password doesn't match");
+					}
+				} catch (ClassNotFoundException | SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 			
 		});
@@ -88,18 +107,18 @@ public class jf3 extends JFrame {
 		lblNewLabel_2.setBounds(10, 125, 100, 14);
 		contentPane.add(lblNewLabel_2);
 		
-		textField = new JTextField();
-		textField.setBounds(90, 123, 116, 20);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		ID = new JTextField();
+		ID.setBounds(90, 123, 116, 20);
+		contentPane.add(ID);
+		ID.setColumns(10);
 		
 		JLabel lblNewLabel_3 = new JLabel("Password :");
 		lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblNewLabel_3.setBounds(10, 164, 76, 14);
 		contentPane.add(lblNewLabel_3);
 		
-		passwordField = new JPasswordField();
-		passwordField.setBounds(90, 162, 116, 20);
-		contentPane.add(passwordField);
+		password = new JPasswordField();
+		password.setBounds(90, 162, 116, 20);
+		contentPane.add(password);
 	}
 }

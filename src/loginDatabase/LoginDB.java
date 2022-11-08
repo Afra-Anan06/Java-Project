@@ -6,13 +6,13 @@ public class LoginDB {
 	public static String login(String uname,String password) throws ClassNotFoundException, SQLException
 	{
 		String url = "jdbc:mysql://localhost:3306/login";
-		String un = "root";
-		String pass = "root";
-		Connection con = DriverManager.getConnection(url,un,pass);
-		Statement st = con.createStatement();
-		String query = "SELECT * FROM login.login";
-		ResultSet rs = st.executeQuery(query);
-		while(rs.next())
+		String un = "root";                                     // username 
+		String pass = "root";                                   //mysql pass
+		Connection con = DriverManager.getConnection(url,un,pass); //
+		Statement st = con.createStatement();             
+		String query = "SELECT * FROM login.login";      
+		ResultSet rs = st.executeQuery(query);                //Table ta rs e ashteche
+		while(rs.next())   
 		{
 			if(rs.getString("username").equals(uname) && rs.getString("password").equals(password))
 			{
@@ -30,14 +30,14 @@ public class LoginDB {
 		return null;
 	}
 	
-	public static void registerLogin(String uname,String pass) throws SQLException
+	public static void registerLogin(String uname,String pass,String name , String role) throws SQLException
 	{
 		String url ="jdbc:mysql://localhost:3306/login";
 		String username = "root";
 		String passsword = "root";
 		Connection con = DriverManager.getConnection(url, username, passsword);
 		Statement st = con.createStatement();
-		String query = "INSERT INTO login.login values ('"+uname+"','"+pass+"')";
+		String query = "INSERT INTO login.login values ('"+uname+"','"+pass+"','"+name+"','"+role+"')";
 		st.executeUpdate(query);
 		
 		System.out.println("Login details updated");
